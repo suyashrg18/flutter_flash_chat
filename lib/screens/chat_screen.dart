@@ -94,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   TextButton(
                     onPressed: () {
                       _store.collection('messages').add(
-                          {'text': textMessage, 'sender': loggedinUser.email});
+                          {'text': textMessage, 'sender': loggedinUser.email,'timestamp':new DateTime.now()});
 
                       textMessageController.clear();
                     },
@@ -117,7 +117,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _store.collection('messages').snapshots(),
+        stream: _store.collection('messages').orderBy('timestamp',descending: true).snapshots(),
         builder: (context, snapshot) {
           List<MessageBubble> messageListWidget = [];
           if (!snapshot.hasData) {
