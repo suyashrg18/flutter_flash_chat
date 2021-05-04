@@ -53,11 +53,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           children: <Widget>[
             Row(
               children: <Widget>[
-                Hero(
-                  tag: 'flashimage',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
-                    height: curvedAnimation.value * 60,
+                Flexible(
+                  child: Hero(
+                    tag: 'flashimage',
+                    child: Container(
+                      child: Image.asset('images/logo.png'),
+                      height: curvedAnimation.value * 60,
+                    ),
                   ),
                 ),
                 DefaultTextStyle(
@@ -74,27 +76,31 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             SizedBox(
               height: 48.0,
             ),
-            Hero(
-              tag: 'loginbtn',
-              child: FlashButton(
-                  color: Colors.lightBlueAccent,
-                  function: () {
-                    //Go to login screen.
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  text: 'Log In'),
-            ),
-            Hero(
-              tag: 'regbtn',
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+            Flexible(
+              child: Hero(
+                tag: 'loginbtn',
                 child: FlashButton(
-                    color: Colors.blueAccent,
+                    color: Colors.lightBlueAccent,
                     function: () {
                       //Go to login screen.
-                      Navigator.pushNamed(context, RegistrationScreen.id);
+                      Navigator.pushNamed(context, LoginScreen.id);
                     },
-                    text: 'Register'),
+                    text: 'Log In'),
+              ),
+            ),
+            Flexible(
+              child: Hero(
+                tag: 'regbtn',
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: FlashButton(
+                      color: Colors.blueAccent,
+                      function: () {
+                        //Go to login screen.
+                        Navigator.pushNamed(context, RegistrationScreen.id);
+                      },
+                      text: 'Register'),
+                ),
               ),
             ),
           ],

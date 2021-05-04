@@ -29,13 +29,15 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-          Hero(
-          tag: 'flashimage',
-            child: Container(
-            height: 200.0,
-            child: Image.asset('images/logo.png'),
-          ),
+          Flexible(
+            child: Hero(
+            tag: 'flashimage',
+              child: Container(
+              height: 200.0,
+              child: Image.asset('images/logo.png'),
+            ),
         ),
+          ),
         SizedBox(
           height: 48.0,
         ),
@@ -65,26 +67,28 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           height: 24.0,
         ),
-        Hero(
-          tag: 'loginbtn',
-          child: FlashButton(color:Colors.lightBlueAccent,function: () async{
-            try {
-              setState(() {
-                showProgress = true;
-              });
-              final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-              if(user != null){
+        Flexible(
+          child: Hero(
+            tag: 'loginbtn',
+            child: FlashButton(color:Colors.lightBlueAccent,function: () async{
+              try {
                 setState(() {
-                  showProgress = false;
+                  showProgress = true;
                 });
-                Navigator.pushNamed(context, ChatScreen.id);
+                final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+                if(user != null){
+                  setState(() {
+                    showProgress = false;
+                  });
+                  Navigator.pushNamed(context, ChatScreen.id);
 
+                }
+              }catch(e){
+                print(e);
               }
-            }catch(e){
-              print(e);
-            }
 
-          },text:'Log In') ,
+            },text:'Log In') ,
+          ),
         ),
         ],
     ),),
