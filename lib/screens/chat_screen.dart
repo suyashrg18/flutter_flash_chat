@@ -117,7 +117,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _store.collection('messages').orderBy('timestamp',descending: true).snapshots(),
+        stream: _store.collection('messages').orderBy('timestamp',descending: true).snapshots(),//sort messages by latest
         builder: (context, snapshot) {
           List<MessageBubble> messageListWidget = [];
           if (!snapshot.hasData) {
